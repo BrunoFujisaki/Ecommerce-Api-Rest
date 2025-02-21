@@ -3,6 +3,7 @@ package brunofujisaki.ecommerce.domain.pedido;
 import brunofujisaki.ecommerce.domain.itempedido.ItemPedido;
 import brunofujisaki.ecommerce.domain.cliente.Cliente;
 import brunofujisaki.ecommerce.domain.itempedido.dto.ItemPedidoDto;
+import brunofujisaki.ecommerce.infra.exception.ValidacaoException;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -46,6 +47,7 @@ public class Pedido {
     }
 
     public void atualizarStatus(StatusPedido status) {
+        if (this.status == StatusPedido.ENTREGUE) throw new ValidacaoException("Não há como alterar o status de um pedido que ja foi entregue.");
         this.status = status;
     }
 }

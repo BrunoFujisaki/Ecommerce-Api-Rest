@@ -60,7 +60,7 @@ public class Produto {
         this.estoque += adicionar ? quantidade : -quantidade;
     }
 
-    public void desativarProduto() {
+    public void desativar() {
         this.ativo = false;
     }
 }

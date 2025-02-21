@@ -9,9 +9,10 @@ public record DetalharProdutoDto(
         String descricao,
         Double preco,
         LocalDate dataCadastro,
-        Integer estoque
+        Integer estoque,
+        Boolean ativo
 ) {
     public DetalharProdutoDto(Produto produto) {
-        this(produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.getDataCadastro(), produto.getEstoque());
+        this(produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.getDataCadastro(), produto.getEstoque(), produto.getAtivo());
     }
 }

@@ -6,6 +6,7 @@ import brunofujisaki.ecommerce.domain.produto.dto.ProdutoDto;
 import brunofujisaki.ecommerce.infra.exception.ValidacaoException;
 import brunofujisaki.ecommerce.domain.produto.Produto;
 import brunofujisaki.ecommerce.repository.ProdutoRepository;
+import brunofujisaki.ecommerce.service.ProdutoService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
@@ -22,6 +23,9 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private ProdutoService produtoService;
 
     @PostMapping
     public ResponseEntity cadastrarProduto(@RequestBody @Valid ProdutoDto produtoDto, UriComponentsBuilder uriBuilder) {
@@ -48,8 +52,7 @@ public class ProdutoController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity desativarProduto(@PathVariable Long id) {
-        var produto = produtoRepository.findById(id).orElseThrow(() -> new ValidacaoException("Produto não encontrado"));
-        produto.desativarProduto();
+        produtoService.desativarProduto(id);
         return ResponseEntity.noContent().build();
     }
 

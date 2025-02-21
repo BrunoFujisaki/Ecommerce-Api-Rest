@@ -43,6 +43,9 @@ public class PedidoService {
 
     public void cancelarPedido(Long id) {
         var pedido = pedidoRepository.findById(id).orElseThrow(() -> new ValidacaoException("Pedido não encontrado."));
+
+        if (pedido.getStatus() != StatusPedido.PENDENTE) throw new ValidacaoException("Só é possível cancelar pedidos pendentes.");
+
         pedido.getItens().forEach(i -> {
             produtoService.verificarProdutoEAtualizarEstoque(i.getProduto().getId(), i.getQuantidade(), true);
         });
