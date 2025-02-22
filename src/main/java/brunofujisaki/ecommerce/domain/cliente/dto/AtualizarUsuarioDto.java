@@ -2,7 +2,7 @@ package brunofujisaki.ecommerce.domain.cliente.dto;
 
 import jakarta.validation.constraints.NotNull;
 
-public record AtualizarClienteDto(
+public record AtualizarUsuarioDto(
         @NotNull
         Long id,
         String nome,

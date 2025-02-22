@@ -1,12 +1,12 @@
 package brunofujisaki.ecommerce.service;
 
-import brunofujisaki.ecommerce.domain.pedido.dto.PedidoDto;
-import brunofujisaki.ecommerce.infra.exception.ValidacaoException;
 import brunofujisaki.ecommerce.domain.itempedido.ItemPedido;
 import brunofujisaki.ecommerce.domain.pedido.Pedido;
 import brunofujisaki.ecommerce.domain.pedido.StatusPedido;
-import brunofujisaki.ecommerce.repository.ClienteRepository;
+import brunofujisaki.ecommerce.domain.pedido.dto.PedidoDto;
+import brunofujisaki.ecommerce.infra.exception.ValidacaoException;
 import brunofujisaki.ecommerce.repository.PedidoRepository;
+import brunofujisaki.ecommerce.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class PedidoService {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private PedidoRepository pedidoRepository;
@@ -23,9 +23,9 @@ public class PedidoService {
     private ProdutoService produtoService;
 
     public Pedido cadastrarPedido(PedidoDto pedidoDto) {
-        var cliente = clienteRepository.findById(pedidoDto.clienteId()).orElseThrow();
+        var usuario = usuarioRepository.findById(pedidoDto.clienteId()).orElseThrow();
 
-        var pedido = new Pedido(cliente);
+        var pedido = new Pedido(usuario);
 
         if (pedidoDto.itens().isEmpty()) throw new ValidacaoException("A lista do pedido não pode estar vazia.");
 

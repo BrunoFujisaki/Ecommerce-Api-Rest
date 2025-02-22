@@ -12,6 +12,6 @@ public record DetalharPedidoDto(
         StatusPedido status
 ) {
     public DetalharPedidoDto(Pedido pedido) {
-        this(pedido.getData(), pedido.getCliente().getId(), pedido.getValorTotal(), pedido.getStatus());
+        this(pedido.getData(), pedido.getUsuario().getId(), pedido.getValorTotal(), pedido.getStatus());
     }
 }

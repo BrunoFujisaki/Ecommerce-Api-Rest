@@ -19,18 +19,12 @@ public class ProdutoService {
     public Produto verificarProdutoEAtualizarEstoque(Long id, Integer quantidade, boolean adicionar) {
         var produto = produtoRepository.findById(id).orElseThrow(() -> new ValidacaoException("Produto não encontrado."));
 
-        if (!adicionar) {
-            verificarEstoque(produto, quantidade);
-        }
+        if (!produto.getAtivo()) throw new ValidacaoException("Produto não disponível.");
+
+        if (!adicionar) verificarEstoque(produto, quantidade);
 
         produto.atualizarEstoque(quantidade, adicionar);
         return produto;
-    }
-
-    private void verificarEstoque(Produto produto, Integer quantidade) {
-        if (quantidade > produto.getEstoque() || produto.getEstoque() == 0) {
-            throw new ValidacaoException("Produto: " + produto.getNome() + "\nSem estoque suficiente");
-        }
     }
 
     public void desativarProduto(Long id) {
@@ -39,6 +33,11 @@ public class ProdutoService {
         if (pedidoRepository.existePedidoPendenteComProduto(produto.getId())) throw new ValidacaoException("Não é possível desativar um produto que possui pedido pendente.");
 
         produto.desativar();
+    }
 
+    private void verificarEstoque(Produto produto, Integer quantidade) {
+        if (quantidade > produto.getEstoque() || produto.getEstoque() == 0) {
+            throw new ValidacaoException("Produto: " + produto.getNome() + "\nSem estoque suficiente");
+        }
     }
 }

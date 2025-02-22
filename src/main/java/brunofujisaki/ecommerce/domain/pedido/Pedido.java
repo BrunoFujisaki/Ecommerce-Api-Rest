@@ -1,7 +1,7 @@
 package brunofujisaki.ecommerce.domain.pedido;
 
+import brunofujisaki.ecommerce.domain.cliente.Usuario;
 import brunofujisaki.ecommerce.domain.itempedido.ItemPedido;
-import brunofujisaki.ecommerce.domain.cliente.Cliente;
 import brunofujisaki.ecommerce.domain.itempedido.dto.ItemPedidoDto;
 import brunofujisaki.ecommerce.infra.exception.ValidacaoException;
 import jakarta.persistence.*;
@@ -24,16 +24,16 @@ public class Pedido {
     private Long id;
     private LocalDate data;
     @ManyToOne
-    private Cliente cliente;
+    private Usuario usuario;
     private Double valorTotal = 0.0;
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<>();
 
-    public Pedido(Cliente cliente) {
+    public Pedido(Usuario usuario) {
         this.data = LocalDate.now();
-        this.cliente = cliente;
+        this.usuario = usuario;
         this.status = StatusPedido.PENDENTE;
     }
 
