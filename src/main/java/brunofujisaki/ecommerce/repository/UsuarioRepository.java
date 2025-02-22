@@ -1,6 +1,6 @@
 package brunofujisaki.ecommerce.repository;
 
-import brunofujisaki.ecommerce.domain.cliente.Usuario;
+import brunofujisaki.ecommerce.domain.usuario.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

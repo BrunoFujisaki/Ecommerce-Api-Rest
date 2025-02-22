@@ -1,6 +1,6 @@
 package brunofujisaki.ecommerce.domain.pedido;
 
-import brunofujisaki.ecommerce.domain.cliente.Usuario;
+import brunofujisaki.ecommerce.domain.usuario.Usuario;
 import brunofujisaki.ecommerce.domain.itempedido.ItemPedido;
 import brunofujisaki.ecommerce.domain.itempedido.dto.ItemPedidoDto;
 import brunofujisaki.ecommerce.infra.exception.ValidacaoException;

@@ -1,4 +1,4 @@
-package brunofujisaki.ecommerce.domain.cliente;
+package brunofujisaki.ecommerce.domain.usuario;
 
 public enum UserRole {
     ADMIN,

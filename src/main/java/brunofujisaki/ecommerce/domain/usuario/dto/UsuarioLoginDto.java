@@ -1,4 +1,4 @@
-package brunofujisaki.ecommerce.domain.cliente.dto;
+package brunofujisaki.ecommerce.domain.usuario.dto;
 
 public record UsuarioLoginDto(
         String email,

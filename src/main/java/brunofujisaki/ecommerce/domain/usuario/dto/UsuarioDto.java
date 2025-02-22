@@ -1,7 +1,7 @@
-package brunofujisaki.ecommerce.domain.cliente.dto;
+package brunofujisaki.ecommerce.domain.usuario.dto;
 
-import brunofujisaki.ecommerce.domain.cliente.UserRole;
-import brunofujisaki.ecommerce.domain.cliente.Usuario;
+import brunofujisaki.ecommerce.domain.usuario.UserRole;
+import brunofujisaki.ecommerce.domain.usuario.Usuario;
 
 public record UsuarioDto(
         String nome,

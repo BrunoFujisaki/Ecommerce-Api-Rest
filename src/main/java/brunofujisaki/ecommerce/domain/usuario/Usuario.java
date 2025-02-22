@@ -1,7 +1,7 @@
-package brunofujisaki.ecommerce.domain.cliente;
+package brunofujisaki.ecommerce.domain.usuario;
 
-import brunofujisaki.ecommerce.domain.cliente.dto.AtualizarUsuarioDto;
-import brunofujisaki.ecommerce.domain.cliente.dto.UsuarioDto;
+import brunofujisaki.ecommerce.domain.usuario.dto.AtualizarUsuarioDto;
+import brunofujisaki.ecommerce.domain.usuario.dto.UsuarioDto;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
