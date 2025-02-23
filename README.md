@@ -2,6 +2,8 @@
 
 API para gerenciamento de uma loja online, permitindo que usuários realizem pedidos, adicionem produtos aos pedidos e acompanhem o status das compras. Inclui autenticação, controle de estoque e administração de produtos.
 
+📌 **A documentação completa da API está disponível no Swagger** em `/swagger-ui.html`.
+
 ## 🔑 Autenticação
 
 ### 📌 Registro de Usuário
