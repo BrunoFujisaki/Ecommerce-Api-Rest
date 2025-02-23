@@ -14,6 +14,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     @Query("SELECT COUNT(p) > 0 FROM Pedido p JOIN p.itens i WHERE i.produto.id = ?1 AND p.status = 'PENDENTE'")
     boolean existePedidoPendenteComProduto(Long id);
 
+    Page<Pedido> findAllByUsuarioId(Long id, Pageable pageable);
 
-
+    @Query("SELECT COUNT(p) > 0 FROM Pedido p WHERE p.id = ?1 AND p.usuario.id = ?2")
+    boolean pedidoPertenceAoUsuarioLogado(Long pedidoId, Long usuarioId);
 }

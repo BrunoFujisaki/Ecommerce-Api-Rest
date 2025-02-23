@@ -47,7 +47,6 @@ public class Pedido {
     }
 
     public void atualizarStatus(StatusPedido status) {
-        if (this.status == StatusPedido.ENTREGUE) throw new ValidacaoException("Não há como alterar o status de um pedido que ja foi entregue.");
         this.status = status;
     }
 }

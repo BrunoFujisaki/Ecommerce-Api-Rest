@@ -2,6 +2,7 @@ package brunofujisaki.ecommerce.controller;
 
 import brunofujisaki.ecommerce.domain.itempedido.dto.DetalharItemPedidoDto;
 import brunofujisaki.ecommerce.repository.ItemPedidoRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("itens")
+@SecurityRequirement(name = "bearer-key")
 public class ItemPedidoController {
 
     @Autowired

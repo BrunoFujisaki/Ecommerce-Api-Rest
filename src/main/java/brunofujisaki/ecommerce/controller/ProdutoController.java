@@ -1,24 +1,27 @@
 package brunofujisaki.ecommerce.controller;
 
+import brunofujisaki.ecommerce.domain.produto.Produto;
 import brunofujisaki.ecommerce.domain.produto.dto.AtualizarProdutoDto;
 import brunofujisaki.ecommerce.domain.produto.dto.DetalharProdutoDto;
 import brunofujisaki.ecommerce.domain.produto.dto.ProdutoDto;
-import brunofujisaki.ecommerce.infra.exception.ValidacaoException;
-import brunofujisaki.ecommerce.domain.produto.Produto;
 import brunofujisaki.ecommerce.repository.ProdutoRepository;
 import brunofujisaki.ecommerce.service.ProdutoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("produtos")
+@SecurityRequirement(name = "bearer-key")
 public class ProdutoController {
 
     @Autowired
@@ -36,8 +39,8 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DetalharProdutoDto>> listarProdutos(Pageable pageable) {
-        var page = produtoRepository.findAll(pageable).map(DetalharProdutoDto::new);
+    public ResponseEntity<Page<DetalharProdutoDto>> listarProdutos(@PageableDefault(size = 10, sort={"id"}) Pageable pageable, Authentication authentication) {
+        var page = produtoService.verificar(pageable, authentication);
         return ResponseEntity.ok(page);
     }
 

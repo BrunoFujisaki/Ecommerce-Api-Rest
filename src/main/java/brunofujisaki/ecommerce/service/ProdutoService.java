@@ -1,14 +1,20 @@
 package brunofujisaki.ecommerce.service;
 
-import brunofujisaki.ecommerce.infra.exception.ValidacaoException;
 import brunofujisaki.ecommerce.domain.produto.Produto;
+import brunofujisaki.ecommerce.domain.produto.dto.DetalharProdutoDto;
+import brunofujisaki.ecommerce.domain.usuario.UserRole;
+import brunofujisaki.ecommerce.domain.usuario.Usuario;
+import brunofujisaki.ecommerce.infra.exception.ValidacaoException;
 import brunofujisaki.ecommerce.repository.PedidoRepository;
 import brunofujisaki.ecommerce.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProdutoService {
+public class ProdutoService implements VerificadorDeAcesso {
 
     @Autowired
     private ProdutoRepository produtoRepository;
@@ -39,5 +45,14 @@ public class ProdutoService {
         if (quantidade > produto.getEstoque() || produto.getEstoque() == 0) {
             throw new ValidacaoException("Produto: " + produto.getNome() + "\nSem estoque suficiente");
         }
+    }
+
+    @Override
+    public Page<DetalharProdutoDto> verificar(Pageable pageable, Authentication authentication) {
+        var usuario = (Usuario) authentication.getPrincipal();
+        if (usuario.getRole().equals(UserRole.CLIENTE)) {
+            return produtoRepository.findAllByAtivoTrue(pageable).map(DetalharProdutoDto::new);
+        }
+        return produtoRepository.findAll(pageable).map(DetalharProdutoDto::new);
     }
 }
