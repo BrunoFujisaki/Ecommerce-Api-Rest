@@ -21,7 +21,7 @@ public class TokenService {
 
     public String gerarToken(Usuario usuario) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256("12345");
+            Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("ecommerce")
                     .withSubject(usuario.getEmail())
@@ -38,7 +38,7 @@ public class TokenService {
 
     public String getSubject(String tokenJwt) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256("12345");
+            Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
                     .withIssuer("ecommerce")
                     .build()
